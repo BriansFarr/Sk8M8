@@ -4,6 +4,7 @@ const LogEntry = require('../models/LogEntry');
 
 const router = Router();
 
+// Get All
 router.get('/', async (req, res, next) => {
   try {
     const entries = await LogEntry.find();
@@ -13,7 +14,21 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-router.post('/', async (req, res, next) => {
+// Get One
+router.get('/:id', async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const item = await LogEntry.findOne({
+      _id: id,
+    });
+    return res.json(item);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Create One
+router.post('/:id', async (req, res, next) => {
   try {
     const logEntry = new LogEntry(req.body);
     const createdEntry = await logEntry.save();
@@ -24,6 +39,16 @@ router.post('/', async (req, res, next) => {
     }
     next(error);
   }
+});
+
+// Update One
+router.put('/:id', (req, res, next) => {
+
+});
+
+// Delete One
+router.delete('/:id', (req, res) => {
+
 });
 
 module.exports = router;
