@@ -28,7 +28,7 @@ router.get('/:id', async (req, res, next) => {
 });
 
 // Create One
-router.post('/:id', async (req, res, next) => {
+router.post('/', async (req, res, next) => {
   try {
     const logEntry = new LogEntry(req.body);
     const createdEntry = await logEntry.save();
@@ -42,13 +42,27 @@ router.post('/:id', async (req, res, next) => {
 });
 
 // Update One
-router.put('/:id', (req, res, next) => {
-
+router.get('/:id', async (req, res, next) => {
+  try {
+    const item = await LogEntry.findOneAndUpdate({
+    });
+    return res.json(item);
+  } catch (error) {
+    next(error);
+  }
 });
 
 // Delete One
-router.delete('/:id', (req, res) => {
-
+router.delete('/:id', async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const item = await LogEntry.deleteOne({
+      _id: id,
+    });
+    return res.json(item);
+  } catch (error) {
+    next(error);
+  }
 });
 
 module.exports = router;
