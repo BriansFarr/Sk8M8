@@ -42,15 +42,15 @@ router.post('/', async (req, res, next) => {
 });
 
 // Update One
-router.get('/:id', async (req, res, next) => {
-  try {
-    const item = await LogEntry.findOneAndUpdate({
-    });
-    return res.json(item);
-  } catch (error) {
-    next(error);
-  }
-});
+// router.get('/:id', async (req, res, next) => {
+//   try {
+//     const item = await LogEntry.findOneAndUpdate({
+//     });
+//     return res.json(item);
+//   } catch (error) {
+//     next(error);
+//   }
+// });
 
 // Delete One
 router.delete('/:id', async (req, res, next) => {
